@@ -1,0 +1,7 @@
+div {
+    background: #222;
+    height: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

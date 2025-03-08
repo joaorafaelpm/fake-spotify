@@ -4,7 +4,7 @@ export default function Header () {
     return (
         <div className={styles.container}>
             <ul className={styles.list}>
-                <li className={styles.list_item}>image</li>
+                <li className={styles.list_item}>(Imagem spotify)</li>
                 <li className={styles.list_item}> 
                     <ul>
                         <li>Home</li>                    
