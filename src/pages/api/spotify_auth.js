@@ -14,9 +14,6 @@ export default async function GetSpotifyAuth({ req , res }) {
     .then(resp => {
         token = resp[0].access_token;
         data = resp[0];
-        console.log("---------------------------------------------------------------")
-        console.log(`token : ${token}`)
-        console.log("---------------------------------------------------------------")
     })
     .catch(err =>{console.log(err)}) 
 
