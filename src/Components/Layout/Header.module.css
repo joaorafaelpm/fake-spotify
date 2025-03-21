@@ -5,13 +5,20 @@
     align-items: center;
     background-color: #333;
     color: #fff;
+    padding: 10px;
 }
 
 .list {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    list-style: none;
 }
+
+.header_icon {
+    color: #fff;
+}
+
 .list:nth-child(1)  {
     text-align: left;
     flex: 1;

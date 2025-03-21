@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { configDotenv } from 'dotenv';
+
+configDotenv();
 
 let accessToken = null;
 let refreshToken = null;
@@ -6,7 +9,7 @@ const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
 const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI; 
 
-export default async function handler(req, res) {
+export default async function accessTokenHandler(req, res) {
     // Passamos uma requisição nestá URL na função authhandler, que passa um código como conteúdo no body usando o método POST
     // Ou seja, caso seja POST, a gente pega o código (code = req.body) e a gente faz um POST na api do spotify pegando o nosso access token 
     if (req.method === 'POST') {
