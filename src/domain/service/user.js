@@ -26,10 +26,6 @@ const scope = [
     'user-follow-modify'
 ];
 
-
-/**
- * Função para fazer login com o spotify - Só redirecionamento, sem retornos!
- */
 export const loginWithSpotify = () => {
     // Minhas variáveis globais
     const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
@@ -42,17 +38,18 @@ export const loginWithSpotify = () => {
     // Agora a gente vai até o spotifyAuthHandler para interceptar esse código e envia-lo até a nossa api para pegar o access token!
 }
 
-/**
- * Função para pegar as informações do meu usuário já cadastrado
- * @returns {object} retorna o usuário como objeto json
- */
-export const fetchSpotifyProfile = (token) => {
+export const fetchSpotifyProfile = async (token) => {
     // Função para personalizar o site com informações do usuário!
-    const response = fetch('https://api.spotify.com/v1/me', {
+    const response = await fetch('https://api.spotify.com/v1/me', {
+        method : "GET" ,
         headers: {
-            Authorization: `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         }
-    });
+    }).then((res) => res.json())
+    .then((data) => {
+        return data;
+    })
+    .catch((err) => console.log(err));
 
-    return response.json();
+    return response;
   }
