@@ -2,8 +2,16 @@
 //* Neste caso, em que a maioria das funções vão precisar do meu accessToken, é mais facil usar o nosso hook dentro da onde aquela função vai ser usada, já que não é possível usar o localStorage fora de um useEffect no Nextjs, o que impossibilita pegar o token que nós já temos!
 
 import { configDotenv } from 'dotenv';
-
+import { getLocalStorage, setLocalStorage } from '../../../Config/localStorageHandler';
 configDotenv();
+
+
+
+// Minhas variáveis globais
+const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
+const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
+const clientUserName = process.env.NEXT_PUBLIC_USERNAME;
+
 const scope = [
     'ugc-image-upload',
     'user-read-playback-state',
@@ -26,11 +34,35 @@ const scope = [
     'user-follow-modify'
 ];
 
-export const loginWithSpotify = () => {
-    // Minhas variáveis globais
-    const redirectUri = process.env.NEXT_PUBLIC_REDIRECT_URI;
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
+let token = null;
+let isAuthenticated = null;
 
+async function fetchToken() {
+    const response = await fetch('http://localhost:3000/api/refresh' , {
+      method: "POST",
+      headers: {
+      "Content-Type" : "aplication/json"
+      },
+      body : JSON.stringify({
+        refreshToken : document.cookie.split(';').find(cookie => cookie.startsWith('refreshToken=')).split('=')[1]
+      })
+    });
+    const data = await response.json();
+    if (data.accessToken) {
+        token = data.accessToken;
+        isAuthenticated = getLocalStorage('is_logged');
+        setLocalStorage('access_token', data.accessToken);
+      }   
+}
+
+if (isAuthenticated) {
+    fetchToken();
+}
+setInterval(fetchToken, 55 * 60 * 1000);
+
+
+
+export const loginWithSpotify = () => {
     // Crio uma constante que é a url do spotify para autorizar o usuário somente com id e passo como escopo para receber os dados do usuário
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scope)}`;
     window.location.href = authUrl; 
@@ -38,18 +70,29 @@ export const loginWithSpotify = () => {
     // Agora a gente vai até o spotifyAuthHandler para interceptar esse código e envia-lo até a nossa api para pegar o access token!
 }
 
-export const fetchSpotifyProfile = async (token) => {
+export const fetchSpotifyProfile = async () => {
     // Função para personalizar o site com informações do usuário!
+    await fetchToken();
+    
     const response = await fetch('https://api.spotify.com/v1/me', {
         method : "GET" ,
         headers: {
             "Authorization": `Bearer ${token}`
         }
     }).then((res) => res.json())
-    .then((data) => {
-        return data;
-    })
     .catch((err) => console.log(err));
-
     return response;
   }
+
+export const fetchUserPlaylist = async () => {
+    await fetchToken();
+
+    const response = await fetch(`https://api.spotify.com/v1/users/${clientUserName}/playlists` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+}

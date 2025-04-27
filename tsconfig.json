@@ -32,8 +32,8 @@
     "src/pages/index.js",
     "src/domain/service/authhandler.js",
     "src/pages/api/refresh.js",
-    "src/Components/Main.tsx",
-    "src/Components/Layout/Header.tsx"
-  ],
+    "src/Components/Main.js",
+    "src/Components/Layout/Header.js"
+, "src/Components/Layout/UserDisplay/PlaylistCard.js", "src/Components/Layout/MusicDisplay/Biblioteca.js"  ],
   "exclude": ["node_modules"]
 }

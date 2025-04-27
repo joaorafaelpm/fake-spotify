@@ -1,17 +1,30 @@
+import { useEffect, useState } from "react";
 import Footer from "./Layout/Footer";
 import Header from "./Layout/Header";
+import { getLocalStorage } from "../../Config/localStorageHandler";
+import { loginWithSpotify } from "../domain/service/user";
+import styles from "./Main.module.css";
 
-type Main = {
-    children: React.ReactNode;
-    userPic: string;
-}
-
-export default function Main (props : Main) {
+export default function Main ({ children }) {
+    const [userIsAuth , setUserIsAuth] = useState(false);
+    useEffect(() => {
+        
+        if (getLocalStorage("is_logged") === "true") {
+            setUserIsAuth(true);
+        };
+    })
     return (
-        <div>
-            <Header userPic={props.userPic}/>
-                {props.children}
+        <>
+            <Header/>
+            {userIsAuth ? ( 
+                children
+             ): ( 
+                <div className={styles.container}>
+                    <span>Faça login com seu usuário para usar o spotify de maneira personalizada!</span>
+                    <button onClick={loginWithSpotify}>Login com Spotify</button>
+                </div>
+            )}
             <Footer/>
-        </div>
-    )
+        </>
+    );
 }

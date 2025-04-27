@@ -1,8 +1,20 @@
+import Container from '../Container'
+import styles from './Discover.module.css'
+
 export default function Discover () {
     return (
-        <div>
-            <h1>Discover</h1>
-            <p>Discover new music and artists.</p>
-        </div>
+        <Container>
+            <div className={styles.container}>
+            <div className={styles.container_header}>
+
+                <ul >
+                    <li className={styles.list_item}>Tudo</li>
+                    <li className={styles.list_item}>Músicas</li>
+                    <li className={styles.list_item}>Podcast</li>
+                </ul>
+            </div>
+            </div>
+
+        </Container>
     )
 }

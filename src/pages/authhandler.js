@@ -29,6 +29,8 @@ export default function authHandler() {
         document.cookie = `refreshToken=${data.refreshToken}; path=/ ; Secure ; SameSite=Strict`;
         document.cookie = `accessToken=${data.accessToken}; path=/ ; Secure ; SameSite=Strict`; 
         window.localStorage.setItem("is_logged", true);
+        window.localStorage.setItem("refreh_token", data.refreshToken);
+        window.localStorage.setItem("accessToken", data.accessToken);
         window.location.href = "http://localhost:3000/";
       })
       .catch((error) => console.error("Erro ao pegar token:", error));

@@ -1,0 +1,23 @@
+.container {
+    background-color: #121212;
+    padding: 16px 30px;
+    margin: 10px;
+    margin-top: 20px;
+    width: 50vw;
+    height: calc(100vh - 190px);
+    overflow-y: auto; 
+    color: #b3b3b3; 
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 8px;
+}
+
+.strong_name{
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+  
