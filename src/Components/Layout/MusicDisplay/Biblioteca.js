@@ -3,14 +3,7 @@ import { fetchUserPlaylist } from '@/domain/service/user'
 import { useEffect, useRef, useState } from 'react'
 import PlaylistCard from '../UserDisplay/PlaylistCard'
 
-export default function Biblioteca () {
-    const [userPlaylists, setUserPlaylists] = useState([])
-    useEffect(() => {
-        fetchUserPlaylist().then((res) => {
-            setUserPlaylists(res.items); 
-        })} , [])
-    console.log(userPlaylists)
-
+export default function Biblioteca ({userPlaylists}) {
     const [isScrolled, setIsScrolled] = useState(false);
     const scrollableDivRef = useRef();
 
@@ -44,7 +37,7 @@ export default function Biblioteca () {
 
                 <div className={styles.container_playlists} ref={scrollableDivRef}>
                     {userPlaylists.map((playlist) => (
-                        <PlaylistCard playlist={playlist}/>
+                        <PlaylistCard playlist={playlist} key={playlist.id}/>
                     ))}
                 </div>
                 

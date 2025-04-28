@@ -8,25 +8,14 @@ import { useEffect, useState } from "react";
 import { getLocalStorage } from "../../../Config/localStorageHandler";
 import { fetchSpotifyProfile } from "@/domain/service/user";
 
-export default function Header() {
+export default function Header({userImage}) {
   const [searchText, setSearchText] = useState("");
-  const [user , setUser] = useState();
   const [userIsAuth, setUserIsAuth] = useState(false);
-
-  let accessToken = null;
-  useEffect(() => {
-    accessToken = window.localStorage.getItem("accessToken");
-    if (accessToken) {
-      fetchSpotifyProfile(accessToken).then((res) => {
-        setUser(res);
-      }).catch((err) => console.log(err));
-    }
-    if (getLocalStorage("is_logged") === "true") {
-      setUserIsAuth(true);
-    }
-  }, [accessToken]);
-  let userImage = user?.images[0].url
-
+  
+  useEffect(()=> {
+    setUserIsAuth(getLocalStorage("is_logged"))
+  }, [])
+  
   function handleInputChange(e) {
     setSearchText(e.target.value);
   }

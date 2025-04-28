@@ -5,17 +5,16 @@ import { getLocalStorage } from "../../Config/localStorageHandler";
 import { loginWithSpotify } from "../domain/service/user";
 import styles from "./Main.module.css";
 
-export default function Main ({ children }) {
+export default function Main ({ children , userImage}) {
     const [userIsAuth , setUserIsAuth] = useState(false);
     useEffect(() => {
-        
         if (getLocalStorage("is_logged") === "true") {
             setUserIsAuth(true);
         };
     })
     return (
         <>
-            <Header/>
+            <Header userImage={userImage}/>
             {userIsAuth ? ( 
                 children
              ): ( 

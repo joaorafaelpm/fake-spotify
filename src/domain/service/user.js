@@ -34,31 +34,7 @@ const scope = [
     'user-follow-modify'
 ];
 
-let token = null;
-let isAuthenticated = null;
 
-async function fetchToken() {
-    const response = await fetch('http://localhost:3000/api/refresh' , {
-      method: "POST",
-      headers: {
-      "Content-Type" : "aplication/json"
-      },
-      body : JSON.stringify({
-        refreshToken : document.cookie.split(';').find(cookie => cookie.startsWith('refreshToken=')).split('=')[1]
-      })
-    });
-    const data = await response.json();
-    if (data.accessToken) {
-        token = data.accessToken;
-        isAuthenticated = getLocalStorage('is_logged');
-        setLocalStorage('access_token', data.accessToken);
-      }   
-}
-
-if (isAuthenticated) {
-    fetchToken();
-}
-setInterval(fetchToken, 55 * 60 * 1000);
 
 
 
@@ -70,9 +46,8 @@ export const loginWithSpotify = () => {
     // Agora a gente vai até o spotifyAuthHandler para interceptar esse código e envia-lo até a nossa api para pegar o access token!
 }
 
-export const fetchSpotifyProfile = async () => {
+export const fetchSpotifyProfile = async (token) => {
     // Função para personalizar o site com informações do usuário!
-    await fetchToken();
     
     const response = await fetch('https://api.spotify.com/v1/me', {
         method : "GET" ,
@@ -84,8 +59,7 @@ export const fetchSpotifyProfile = async () => {
     return response;
   }
 
-export const fetchUserPlaylist = async () => {
-    await fetchToken();
+export const fetchUserPlaylist = async (token) => {
 
     const response = await fetch(`https://api.spotify.com/v1/users/${clientUserName}/playlists` , {
         method : "GET" ,

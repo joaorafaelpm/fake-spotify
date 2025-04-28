@@ -34,6 +34,6 @@
     "src/pages/api/refresh.js",
     "src/Components/Main.js",
     "src/Components/Layout/Header.js"
-, "src/Components/Layout/UserDisplay/PlaylistCard.js", "src/Components/Layout/MusicDisplay/Biblioteca.js"  ],
+, "src/Components/Layout/UserDisplay/PlaylistCard.js", "src/Components/Layout/MusicDisplay/Biblioteca.js", "src/app/page.js"  ],
   "exclude": ["node_modules"]
 }
