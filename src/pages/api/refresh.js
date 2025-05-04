@@ -9,7 +9,7 @@ export default async function refreshTokenHandler(req, res) {
   // Eu programo para toda vez que eu receber uma requisição do tipo get nesse endereço, eu volto na API do spotify e faço mais um post e renovo o meu token!
   if (req.method === "POST") {
     refreshToken = JSON.parse(req.body);
-    refreshToken = refreshToken["refreshToken"];
+    refreshToken = refreshToken.refreshToken ;
 
     // Verifico se existe um token para eu trocar pelo meu token de acesso
     if (!refreshToken) {

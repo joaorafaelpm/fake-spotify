@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    width: 30vw;
+}
+
+.musicImage {
+    border-radius: 5px;
+}
+
+.musicInfo {
+    width: 100%;
+    font-size: 15px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.musicInfo span {
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.container_artist_name {
+    display: flex;
+    flex-direction: row;
+}
+
+.scrolling {
+    animation: scroll-left 10s linear infinite;
+}
+
+.container_artist_name p{
+    white-space: nowrap ;
+    font-size: 0.875rem;
+    cursor: pointer;
+    margin-right: 4px;
+}
+.container_artist_name p:hover{
+    animation-play-state: paused;
+}
+
+@keyframes scroll-right {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+}

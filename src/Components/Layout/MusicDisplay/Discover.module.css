@@ -3,7 +3,7 @@
     padding: 16px 30px;
     margin: 10px;
     margin-top: 20px;
-    width: 50vw;
+    width: 100%;
     height: calc(100vh - 190px);
     overflow-y: auto; 
     color: #b3b3b3; 
@@ -20,6 +20,7 @@
     display: flex;
     align-items: center;
 }
+
 
 .list_item {
     background-color: #333;
@@ -45,3 +46,16 @@
     background-color: #2a2a2a; 
 }
   
+
+.container_recomends {
+    
+}
+
+.container_recomends p {
+    font-size: 15px
+}
+.container_recomends span {
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: bold;
+}

@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    width: 30vw;
+    justify-content: flex-end;
+}
+
+.container_btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin: 0 10px;
+    
+}
+.container_btn:hover {
+    scale: 1.1;
+}
+
+.screen_playing_now {
+    width: 20px;
+    height: 20px;
+    fill: #383838;
+}
+.screen_playing_now:hover {
+    fill: #ccc;
+}
+.queue {
+    width: 20px;
+    height: 20px;
+    fill: #383838;
+}
+.queue:hover {
+    fill: #ccc;
+}
+.change_device {
+    width: 20px;
+    height: 20px;
+    fill: #383838;
+}
+.change_device:hover {
+    fill: #ccc;
+}
+.fullscreen{
+    width: 20px;
+    height: 20px;
+    fill: #383838;
+}
+.fullscreen:hover{
+    fill: #ccc;
+}

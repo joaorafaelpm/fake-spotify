@@ -2,7 +2,6 @@
 //* Neste caso, em que a maioria das funções vão precisar do meu accessToken, é mais facil usar o nosso hook dentro da onde aquela função vai ser usada, já que não é possível usar o localStorage fora de um useEffect no Nextjs, o que impossibilita pegar o token que nós já temos!
 
 import { configDotenv } from 'dotenv';
-import { getLocalStorage, setLocalStorage } from '../../../Config/localStorageHandler';
 configDotenv();
 
 
@@ -60,7 +59,6 @@ export const fetchSpotifyProfile = async (token) => {
   }
 
 export const fetchUserPlaylist = async (token) => {
-
     const response = await fetch(`https://api.spotify.com/v1/users/${clientUserName}/playlists` , {
         method : "GET" ,
         headers: {
@@ -70,3 +68,70 @@ export const fetchUserPlaylist = async (token) => {
     .catch((err) => console.log(err));
     return response;
 }
+
+export const fetchUsersFollowingArtists = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/following?type=artist` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+}
+
+export const fetchUserTopFollowingArtist = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/top/artists?limit=50` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+
+}
+export const fetchUserTopTracks = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/top/tracks?limit=50` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+    
+}
+
+export const fetchPlayingTrack = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+}
+export const fetchUserFavoriteMusics = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/tracks?limit=50` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+}
+
+export const fetchAvailableDevices = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/player/devices` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+}
+

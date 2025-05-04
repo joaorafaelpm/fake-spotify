@@ -1,12 +1,11 @@
 import styles from "./Header.module.css";
 import Image from "next/image";
-import sleepToken from "../../images/sleeptokengraybgpng.png";
-import homeImage from "../../images/home.png";
+import sleepToken from "../../images/sleepTokenIcon.png";
+import HomeImage from "../../images/home.svg";
 import SearchImage from "../../images/search.svg";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getLocalStorage } from "../../../Config/localStorageHandler";
-import { fetchSpotifyProfile } from "@/domain/service/user";
 
 export default function Header({userImage}) {
   const [searchText, setSearchText] = useState("");
@@ -39,7 +38,7 @@ export default function Header({userImage}) {
         <ul>
           <li className={styles.home_icon_item}>
             <Link href="/">
-              <Image src={homeImage} alt={""} width={25} height={25} />
+              <HomeImage className={styles.homeImage} />
             </Link>
           </li>
           <li className={styles.list_item}>
@@ -54,7 +53,7 @@ export default function Header({userImage}) {
       </li>
       <li>
         <Link href="/account/myaccount">
-          {userIsAuth ? (
+          {userIsAuth && userImage ? (
             <Image src={userImage} alt={""} width={50} height={50} color={"white"} className={styles.profile_icon} />
             ) : (
             <></>

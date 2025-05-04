@@ -1,9 +1,9 @@
 import styles from './Biblioteca.module.css'
-import { fetchUserPlaylist } from '@/domain/service/user'
 import { useEffect, useRef, useState } from 'react'
 import PlaylistCard from '../UserDisplay/PlaylistCard'
+import ArtistCard from '../UserDisplay/ArtistCard'
 
-export default function Biblioteca ({userPlaylists}) {
+export default function Biblioteca ({userPlaylistsAndArtists}) {
     const [isScrolled, setIsScrolled] = useState(false);
     const scrollableDivRef = useRef();
 
@@ -25,23 +25,23 @@ export default function Biblioteca ({userPlaylists}) {
   }, []);
 
     return (
-            <div className={styles.container}>
-                <div className={`${styles.container_header} ${isScrolled ? styles.scrolled : ""}`} >
-                    <span> Sua Biblioteca </span>
-                    <ul >
-                        <li className={styles.list_item}>Artistas</li>
-                        <li className={styles.list_item}>Álbuns</li>
-                        <li className={styles.list_item}>Playlists</li>
-                    </ul>
-                </div>
-
-                <div className={styles.container_playlists} ref={scrollableDivRef}>
-                    {userPlaylists.map((playlist) => (
-                        <PlaylistCard playlist={playlist} key={playlist.id}/>
-                    ))}
-                </div>
-                
-
+        <div className={styles.container}>
+            <div className={`${styles.container_header} ${isScrolled ? styles.scrolled : ""}`} >
+                <span> Sua Biblioteca </span>
+                <ul >
+                    <li className={styles.list_item}>Playlists</li>
+                    <li className={styles.list_item}>Artistas</li>
+                    <li className={styles.list_item}>Álbuns</li>
+                </ul>
             </div>
+
+            <div className={styles.container_playlists} ref={scrollableDivRef}>
+                {userPlaylistsAndArtists?.map((current)=> current.type === "artist" ? 
+                (<ArtistCard artist={current} key={current.id} />)
+                    : 
+                (<PlaylistCard playlist={current} key={current.id} />)
+                )}
+            </div>
+        </div>
     )
 }

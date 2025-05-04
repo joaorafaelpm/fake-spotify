@@ -5,7 +5,7 @@ import { getLocalStorage } from "../../Config/localStorageHandler";
 import { loginWithSpotify } from "../domain/service/user";
 import styles from "./Main.module.css";
 
-export default function Main ({ children , userImage}) {
+export default function Main ({ children , userImage , music , devices}) {
     const [userIsAuth , setUserIsAuth] = useState(false);
     useEffect(() => {
         if (getLocalStorage("is_logged") === "true") {
@@ -23,7 +23,7 @@ export default function Main ({ children , userImage}) {
                     <button onClick={loginWithSpotify}>Login com Spotify</button>
                 </div>
             )}
-            <Footer/>
+            <Footer music={music} devices={devices}/>
         </>
     );
 }
