@@ -1,4 +1,3 @@
-import Container from "../Container";
 import styles from './PlayingNow.module.css'
 
 export default function PlayingNow () {

@@ -22,19 +22,28 @@ export default function MusicDisplay ({music}) {
         nomeArtistas.push(artista.name)
     })
     return (
-        <div className={styles.container}>
-            {music?.album?.images[0]?.url !== undefined ? <Image src={music?.album?.images[0].url} width={60} height={60} alt="music icon" className={styles.musicImage}/> : <div></div>}
-            <div className={styles.musicInfo} ref={containerRef}>
-                <span>{music?.name}</span>
-                {artistas && (
-                    <div className={`${styles.container_artist_name} ${shouldScroll ? styles.scrolling : ''} `} ref={scrollRef}>
-                        {nomeArtistas.map((nome , index) => (
-                            <p key={index}> {nome}{index < nomeArtistas.length - 1 ? ", " : ""} </p>
-                        ))} 
-                    </div>
-                )
-                }
+        <div>
+        {music ? (
+            <div className={styles.container}>
+                {music?.album?.images[0]?.url !== undefined ? <Image src={music?.album?.images[0].url} width={60} height={60} alt="music icon" className={styles.musicImage}/> : <div></div>}
+                <div className={styles.musicInfo} ref={containerRef}>
+                    <span>{music?.name}</span>
+                    {artistas && (
+                        <div className={`${styles.container_artist_name} ${shouldScroll ? styles.scrolling : ''} `} ref={scrollRef}>
+                            {nomeArtistas.map((nome , index) => (
+                                <p key={index}> {nome}{index < nomeArtistas.length - 1 ? ", " : ""} </p>
+                            ))} 
+                        </div>
+                    )
+                    }
+                </div>
             </div>
+            ) : (
+                <div className={styles.noMusicsPlaying}>
+                    <span>Sem músicas tocando no momento!</span>
+                </div>
+            )}
+            
         </div>
     )
 }

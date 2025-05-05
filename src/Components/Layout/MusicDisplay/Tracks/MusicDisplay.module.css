@@ -7,6 +7,21 @@
     width: 30vw;
 }
 
+.noMusicsPlaying  {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    width: 30vw;
+}
+
+.noMusicsPlaying span {
+    font-size: 1.2em;
+    color: #fff;
+    font-weight: bold;
+}
+
 .musicImage {
     border-radius: 5px;
 }
@@ -26,6 +41,7 @@
 
 
 .container_artist_name {
+    margin-top: 5px;
     display: flex;
     flex-direction: row;
 }
@@ -36,11 +52,13 @@
 
 .container_artist_name p{
     white-space: nowrap ;
-    font-size: 0.875rem;
+    font-size: 0.875em;
     cursor: pointer;
     margin-right: 4px;
+    color: #b3b3b3;
 }
 .container_artist_name p:hover{
+    color: #fff;
     animation-play-state: paused;
 }
 

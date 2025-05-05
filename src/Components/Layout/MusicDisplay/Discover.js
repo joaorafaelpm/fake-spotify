@@ -1,4 +1,3 @@
-import Container from '../Container'
 import styles from './Discover.module.css'
 
 export default function Discover ({user}) {

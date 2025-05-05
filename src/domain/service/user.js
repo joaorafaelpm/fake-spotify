@@ -80,8 +80,8 @@ export const fetchUsersFollowingArtists = async (token) => {
     return response;
 }
 
-export const fetchUserTopFollowingArtist = async (token) => {
-    const response = await fetch(`https://api.spotify.com/v1/me/top/artists?limit=50` , {
+export const fetchUserFollowingArtist = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/following?type=artist&limit=50` , {
         method : "GET" ,
         headers: {
             "Authorization": `Bearer ${token}`
@@ -123,7 +123,6 @@ export const fetchUserFavoriteMusics = async (token) => {
     .catch((err) => console.log(err));
     return response;
 }
-
 export const fetchAvailableDevices = async (token) => {
     const response = await fetch(`https://api.spotify.com/v1/me/player/devices` , {
         method : "GET" ,
@@ -134,4 +133,15 @@ export const fetchAvailableDevices = async (token) => {
     .catch((err) => console.log(err));
     return response;
 }
+export const fetchUserSavedAlbums = async (token) => {
+    const response = await fetch(`https://api.spotify.com/v1/me/albums` , {
+        method : "GET" ,
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }).then((res) => res.json())
+    .catch((err) => console.log(err));
+    return response;
+}
+
 

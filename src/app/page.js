@@ -8,7 +8,7 @@ import Discover from "@/Components/Layout/MusicDisplay/Discover";
 import PlayingNow from "@/Components/Layout/MusicDisplay/PlayingNow";
 
 import { getLocalStorage, setLocalStorage } from "../../Config/localStorageHandler";
-import { fetchAvailableDevices, fetchPlayingTrack, fetchSpotifyProfile, fetchUserFavoriteMusics, fetchUserPlaylist, fetchUserTopFollowingArtist} from "@/domain/service/user";
+import { fetchAvailableDevices, fetchPlayingTrack, fetchSpotifyProfile, fetchUserFavoriteMusics, fetchUserPlaylist, fetchUserSavedAlbums, fetchUserFollowingArtist} from "@/domain/service/user";
 
 
 
@@ -21,6 +21,7 @@ export default function MainPage() {
   const [userLikeMusics , setUserLikeMusics] = useState([])
   const [userArtists , setUserArtists] = useState([])
   const [userPlaylists , setUserPlaylists] = useState([])
+  const [userAlbums , setUserAlbums] = useState([])
   let token = null ; 
   let playlistEMusicas = [] ; 
 
@@ -76,8 +77,10 @@ export default function MainPage() {
           "uri": "spotify:user:31cvnuyg2sl5j3wyhecidg2tq7bq",
           "display_name": "João Rafael"
         },
-        "type" : "playlist_curtida",
+        "type" : "playlist",
+        "liked_playlist" : true,
         "total" : data.total,
+        "fixo" : true ,
         "items" : [
           data.items
         ]
@@ -87,8 +90,11 @@ export default function MainPage() {
       fetchUserPlaylist(token).then((data) => {
         setUserPlaylists(data?.items);
       })
-      fetchUserTopFollowingArtist(token).then((data) => {
+      fetchUserFollowingArtist(token).then((data) => {
         setUserArtists(data?.items);
+      })
+      fetchUserSavedAlbums(token).then((data) => {
+        setUserAlbums(data?.items);
       })
 
     }
@@ -99,13 +105,16 @@ export default function MainPage() {
   useEffect(() => {
     fetchAllUserInfos();
   } , [])
-  playlistEMusicas = userLikeMusics.concat(userPlaylists , userArtists);
-  console.log(currentlyTrack)
+  console.log(userArtists)
+  playlistEMusicas = userLikeMusics.concat(userPlaylists , userArtists , userAlbums);
+  const response = playlistEMusicas?.map((obj , index) => {
+    return {...obj , "fixo" : false }
+  })
   return (
     <>
       <Main userImage={userImage} music={currentlyTrack} devices={availableDevices}>
         <ul className={styles.list}>
-          <li><Biblioteca userPlaylistsAndArtists={playlistEMusicas}/></li>
+          <li><Biblioteca userPlaylistsAndArtists={response}/></li>
           <li><Discover user={user}></Discover></li>
           <li><PlayingNow></PlayingNow></li>
         </ul>
