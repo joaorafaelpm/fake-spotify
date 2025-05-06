@@ -17,7 +17,7 @@ export default function Footer ({music , devices}) {
                 <PlayingConfig />
             </li>
             </ul>
-            {devices?.map((device) => device.is_active ? (<div className={styles.container_footer} key={device.id}> <span>Tocando em {device.name}</span></div> ) : <div key={null}> </div> )}
+            {devices?.map((device) => device.is_active && (<div className={styles.container_footer} key={device.id}> <span>Tocando em {device.name}</span></div> ))}
         </div>
     )
 }

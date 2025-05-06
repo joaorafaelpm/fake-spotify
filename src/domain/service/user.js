@@ -87,6 +87,7 @@ export const fetchUserFollowingArtist = async (token) => {
             "Authorization": `Bearer ${token}`
         }
     }).then((res) => res.json())
+    .then((res) => res.artists)
     .catch((err) => console.log(err));
     return response;
 

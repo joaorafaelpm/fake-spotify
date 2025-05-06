@@ -105,9 +105,14 @@ export default function MainPage() {
   useEffect(() => {
     fetchAllUserInfos();
   } , [])
-  console.log(userArtists)
+
+  console.log(userArtists) 
+
   playlistEMusicas = userLikeMusics.concat(userPlaylists , userArtists , userAlbums);
-  const response = playlistEMusicas?.map((obj , index) => {
+  const response = playlistEMusicas?.map((obj) => {
+    if (obj === "undefined") {
+      playlistEMusicas.pop()
+    }
     return {...obj , "fixo" : false }
   })
   return (

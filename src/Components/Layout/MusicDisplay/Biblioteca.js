@@ -36,28 +36,20 @@ export default function Biblioteca ({userPlaylistsAndArtists}) {
         setFilter(e.target.id)
     })
 
-    const changePosition = ((e) => {
-        userPlaylistsAndArtists.map((item , index) => {
-            if (item.id === e.target.id) {
-
-            }
-        })
-    })
-
     return (
         <div className={styles.container}>
             <div className={`${styles.container_header} ${isScrolled ? styles.scrolled : ""}`} >
                 <span> Sua Biblioteca </span>
                 <ul>
-                    <li className={filter === 'playlist' && pressButon ? styles.list_item_pressed : styles.list_item } id='playlist' key="playlist" onClick={filterSearch}>Playlists</li>
-                    <li className={filter === 'artist' && pressButon ? styles.list_item_pressed : styles.list_item} id='artist' key="artist" onClick={filterSearch}>Artistas</li>
-                    <li className={filter === 'album' && pressButon ? styles.list_item_pressed : styles.list_item} id='album' key="album" onClick={filterSearch}>Álbuns</li>
+                    <li className={filter === 'playlist' && pressButon ? styles.list_item_pressed : styles.list_item } id='playlist' onClick={filterSearch}>Playlists</li>
+                    <li className={filter === 'artist' && pressButon ? styles.list_item_pressed : styles.list_item} id='artist' onClick={filterSearch}>Artistas</li>
+                    <li className={filter === 'album' && pressButon ? styles.list_item_pressed : styles.list_item} id='album' onClick={filterSearch}>Álbuns</li>
                 </ul>
             </div>
 
             <div className={styles.container_current} ref={scrollableDivRef}>
                 {filter === "All" ? 
-                userPlaylistsAndArtists?.map((current)=> 
+                userPlaylistsAndArtists?.map((current , index)=> 
                     <CurrentCard current={current} key={current.id} id={current.id}/>
                 ) : userPlaylistsAndArtists?.map((current)=> current.type === filter && 
                     <CurrentCard current={current} key={current.id} id={current.id}/>
